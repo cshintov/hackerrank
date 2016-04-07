@@ -1,4 +1,4 @@
-""" solves ttps://www.hackerrank.com/challenges/acm-icpc-team """
+""" solves https://www.hackerrank.com/challenges/acm-icpc-team """
 
 def read_strings(num):
     """ strings """
