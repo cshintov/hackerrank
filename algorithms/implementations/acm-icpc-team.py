@@ -26,9 +26,7 @@ def find_teams(people):
             (person, person_b)
             for person_b in range(person+1, people)
         ])
-    print teams
     return teams
-
 
 
 def acm_icpc_team(teams, knowledge_grid):
@@ -36,7 +34,6 @@ def acm_icpc_team(teams, knowledge_grid):
     find the maximum number of topics any team can know 
     and the number of teams that knows that many topics
     """ 
-
     def knowledge(team):
         """ calculate knowledge of a team """
         pers_a, pers_b = team
