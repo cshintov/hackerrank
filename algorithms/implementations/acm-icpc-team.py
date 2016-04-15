@@ -1,5 +1,5 @@
 """ solves https://www.hackerrank.com/challenges/acm-icpc-team """
-
+#! /bin/python
 def read_strings(num):
     """ strings """
     for _ in range(num):

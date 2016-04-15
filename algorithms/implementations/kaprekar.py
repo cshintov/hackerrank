@@ -35,7 +35,7 @@ def print_kaprekars(start, end):
             print num,
         print
     else:
-        print 'INVALID RANGE'
+        print 'INVAVLID RANGE'
 
 inputs = read_nums(2)
 print_kaprekars(*inputs)
