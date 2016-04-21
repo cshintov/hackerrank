@@ -12,16 +12,22 @@ def num_lines(num):
         yield map(int, line.strip().split())
 
 
-def rotate(a, b, c):
+def rotate(array):
     """ rotate once a three tuple """
-    return [b, c, a]
+    return array[1:] + [array[0]]
 
 
-def rotate_n_times(three_tup, n):
+def rotate_n_times(array, num):
     """ rotate the three tuple n times """
-    for _ in range(n):
-        three_tup = rotate(*three_tup)
-    return list(three_tup)
+    num %= 3
+    for _ in range(num):
+        array = rotate(array)
+    return array
+
+
+def is_sorted(array):
+    """ checks whether an array is sorted or not """
+    return all(l[i] <= l[i+1] for i in xrange(len(l)-1)) 
 
 
 def is_sortable(array):
