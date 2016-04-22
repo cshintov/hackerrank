@@ -27,26 +27,61 @@ def rotate_n_times(array, num):
 
 def is_sorted(array):
     """ checks whether an array is sorted or not """
-    return all(l[i] <= l[i+1] for i in xrange(len(l)-1)) 
+    return all(array[i] <= array[i+1] for i in xrange(len(array)-1))
+
+
+def rotate_at(position, array):
+    """ rotate a three tuple from position once """
+    return (
+        array[:position] + rotate(array[position:position+3]) +
+        array[position+3:]
+    )
+
+
+def gen_states_helper(array):
+    """ generate all possible states in the process of sorting """
+    for pos in range(len(array)-2):
+        yield rotate_at(pos, array)
+
+
+class Sortable(Exception):
+    """ Sortable exception """
+    pass
+
+from pdb import set_trace
+def gen_states(array):
+    """ generate all possible states in the process of sorting """
+    set_trace()
+    initial_states = gen_states_helper(array)
+    for state in initial_states:
+        temp = gen_states_helper(state)
+        for tst in temp:
+            if is_sorted(tst):
+                raise Sortable
+            try:
+                gen_states(tst)
+            except RuntimeError:
+                continue
 
 
 def is_sortable(array):
     """ checks whether the robot can sort the array """
-    return array
+    try:
+        gen_states(array)
+    except Sortable:
+        return True
+    except RuntimeError:
+        return False
 
 
 def solve():
     """ solve it """
-    tests = input()
-    for test in range(tests):
+    tests = int(raw_input())
+    for _ in range(tests):
         lines = num_lines(2)
-        size = next(lines)
+        _ = next(lines)
         print is_sortable(next(lines))
 
 
 if __name__ == '__main__':
     solve()
-
-12435
-14325
-14253
