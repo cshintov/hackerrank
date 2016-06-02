@@ -1,6 +1,7 @@
-5
-AAAA
-BBBBB
-ABABABAB
-BABABA
-AAABBB
+6
+aaabbb
+ab
+abc
+mnop
+xyyx
+xaxbbbxx
