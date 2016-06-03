@@ -27,9 +27,7 @@ def how_to_make_anagrams(string):
 
 if __name__ == '__main__':
     RESULTS = [how_to_make_anagrams(raw_input()) for _ in range(input())]
-
-
-    EXPECTED = [3, 1, -1, 2, 0, 1]
+    EXPECTED = [3, 1, -1, 2, 0, 1, 2]
     if RESULTS == EXPECTED:
         print 'OK'
     else:
