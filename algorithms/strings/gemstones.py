@@ -2,7 +2,6 @@
 
 def count_of_gemelements(rocks):
     """ find the index of the letter that makes the string not a palindrome """
-
     elements = map(set, rocks)
     gemelemts = reduce(lambda x,y: x.intersection(y), elements)
     return len(gemelemts)
