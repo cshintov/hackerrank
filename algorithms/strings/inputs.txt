@@ -1,8 +1,5 @@
-7
-aaabbb
-ab
-abc
-mnop
-xyyx
-xaxbbbxx
-xxxabxxbbb
+2
+hello
+world
+hi
+world
