@@ -1,5 +1,2 @@
-2
-hello
-world
-hi
-world
+12
+GAAATAAACCCC
