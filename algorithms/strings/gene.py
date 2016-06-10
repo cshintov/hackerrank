@@ -5,13 +5,8 @@ from pdb import set_trace as st
 ALPHABET = list('ACTG')
 def substrings(string, length):
     """ generates substrings of given length and up """
-    if length == len(string):
-        yield string
-        return
-    while length <= len(string):
-        for idx in xrange(len(string) - length + 1):
-            yield string[idx:idx+length]
-        length += 1
+    for idx in xrange(len(string) - length + 1):
+        yield string[idx:idx+length]
 
 
 def sub_contains_extras(substr, extras):
@@ -21,6 +16,20 @@ def sub_contains_extras(substr, extras):
         if not count <= freq[char]:
             return False
     return True
+
+
+def smallest_length(gene, extras, left, right):
+    """ finds the min length to be replaced """
+    if left == right:
+        return left
+    mid = (left + right) / 2
+    for substr in substrings(gene, mid):
+        if sub_contains_extras(substr, extras):
+            res = smallest_length(gene, extras, left, mid)
+            break
+    else:
+        res = smallest_length(gene, extras, mid+1, right)
+    return res
 
 
 def steady_gene(gene, length):
@@ -35,11 +44,8 @@ def steady_gene(gene, length):
         for char in ALPHABET
     }
     extras = {char: abs(diff[char]) for char in ALPHABET if diff[char] < 0}
-    #deficiencies = {char: diff[char] for char in ALPHABET if diff[char] > 0}
     min_len = reduce(lambda x, y: x+y, extras.values())
-    for substr in substrings(gene, min_len):
-        if sub_contains_extras(substr, extras):
-            return len(substr)
+    return smallest_length(gene, extras, min_len, length)
 
 
 if __name__ == '__main__':

@@ -1,13 +1,10 @@
-""" solve https://www.hackerrank.com/challenges/bear-and-steady-gene """
+""" solve https://www.hackerrank.com/challenges/bear-and-steady-gene
+    find out the smallest substring with all the extra letters
+"""
 from collections import Counter as ctr
 from pdb import set_trace as st
 
 ALPHABET = list('ACTG')
-def substrings(string, length):
-    """ generates substrings of given length and up """
-    for idx in xrange(len(string) - length + 1):
-        yield string[idx:idx+length]
-
 
 def sub_contains_extras(substr, extras):
     """ checks whether if substring contains extras """
@@ -18,19 +15,24 @@ def sub_contains_extras(substr, extras):
     return True
 
 
-def smallest_length(gene, extras, left, right):
-    """ finds the min length to be replaced """
-    if left == right:
-        return left
-    mid = (left + right) / 2
-    for substr in substrings(gene, mid):
-        if sub_contains_extras(substr, extras):
-            res = smallest_length(gene, extras, left, mid)
-            break
-    else:
-        res = smallest_length(gene, extras, mid+1, right)
-    return res
+def candidates(posits, min_len):
+    """ candidate beginning and end indices """
+    for idx in range(len(posits)):
+        for jdx in range(idx+1, len(posits)):
+            if jdx - idx + 1 >= min_len:
+                yield idx, jdx
 
+
+def find(s, ch):
+    return (i for i, ltr in enumerate(s) if ltr == ch)
+
+
+def smallest_length(gene, extras, min_len):
+    """ finds the min length to be replaced """
+    for char in extras:
+        indices = find(gene, char)
+
+    
 
 def steady_gene(gene, length):
     """ finds the minimum length of substring to be changed """
@@ -45,12 +47,17 @@ def steady_gene(gene, length):
     }
     extras = {char: abs(diff[char]) for char in ALPHABET if diff[char] < 0}
     min_len = reduce(lambda x, y: x+y, extras.values())
-    return smallest_length(gene, extras, min_len, length)
+    return smallest_length(gene, extras, min_len)
 
 
+import sys
 if __name__ == '__main__':
     LEN = input()
     GENE = raw_input()
     ANS = steady_gene(GENE, LEN)
     print ANS
 
+    LEN = input()
+    GENE = raw_input()
+    ANS = steady_gene(GENE, LEN)
+    print ANS
