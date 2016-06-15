@@ -15,24 +15,31 @@ def sub_contains_extras(substr, extras):
     return True
 
 
-def candidates(posits, min_len):
-    """ candidate beginning and end indices """
-    for idx in range(len(posits)):
-        for jdx in range(idx+1, len(posits)):
-            if jdx - idx + 1 >= min_len:
-                yield idx, jdx
-
-
-def find(s, ch):
-    return (i for i, ltr in enumerate(s) if ltr == ch)
+def candidates(gene, min_len):
+    """ generated candidates of min_len """
+    for idx in xrange(0, len(gene)-min_len+1):
+        yield idx, idx + min_len
 
 
 def smallest_length(gene, extras, min_len):
     """ finds the min length to be replaced """
-    for char in extras:
-        indices = find(gene, char)
+    small_length = len(gene)
+    cands = list(candidates(gene, min_len))
+    for start, end in cands:
+        candidate = gene[start:end]
+        while (end <= len(gene) 
+            and not sub_contains_extras(candidate, extras)):
+            candidate = gene[start:end]
+            print candidate
+            end += 1
+        else:
+            if sub_contains_extras(candidate, extras):
+                small_length = min(len(candidate), small_length)
+                if sub_contains_extras(candidate[1:], extras):
+                    return small_length - 1
+                else:
+                    return small_length
 
-    
 
 def steady_gene(gene, length):
     """ finds the minimum length of substring to be changed """
@@ -50,13 +57,7 @@ def steady_gene(gene, length):
     return smallest_length(gene, extras, min_len)
 
 
-import sys
 if __name__ == '__main__':
-    LEN = input()
-    GENE = raw_input()
-    ANS = steady_gene(GENE, LEN)
-    print ANS
-
     LEN = input()
     GENE = raw_input()
     ANS = steady_gene(GENE, LEN)
