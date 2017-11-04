@@ -6,13 +6,17 @@ from pdb import set_trace as st
 
 ALPHABET = list('ACTG')
 
-def sub_contains_extras(substr, extras):
-    """ checks whether if substring contains extras """
-    freq = ctr(substr)
-    for char, count in extras.items():
-        if not count <= freq[char]:
-            return False
-    return True
+sub_contains_extras = lambda x, y: x
+
+def is_valid(gene, extras):
+    """ checks the validity of the substring """
+    def sub_contains_extras(start, end):
+        """ checks whether if substring contains extras """
+        for char, count in extras.items():
+            if gene[start:end].count(char) != count:
+                return False
+        return True
+    return sub_contains_extras 
 
 
 def candidates(gene, min_len):
@@ -23,15 +27,17 @@ def candidates(gene, min_len):
 
 def smallest_length(gene, extras, min_len):
     """ finds the min length to be replaced """
+    global sub_contains_extras
     small_length = len(gene)
     cands = list(candidates(gene, min_len))
     print cands
+    sub_contains_extras = is_valid(gene, extras)
     for start, end in cands:
         candidate = gene[start:end]
         if len(candidate) >= small_length:
             continue
-        while (end <= len(gene) 
-            and not sub_contains_extras(candidate, extras)):
+        while not sub_contains_extras(start, end):
+            if end <= len(gene): break
             candidate = gene[start:end]
             if len(candidate) >= small_length:
                 end += 1
@@ -39,12 +45,11 @@ def smallest_length(gene, extras, min_len):
             print candidate
             end += 1
         else:
-            if sub_contains_extras(candidate, extras):
-                small_length = min(len(candidate), small_length)
-                if sub_contains_extras(candidate[1:], extras):
-                    small_length = len(candidate) - 1
-                if small_length == min_len:
-                    return min_len
+            small_length = min(len(candidate), small_length)
+            if sub_contains_extras(start+1, end):
+                small_length = len(candidate) - 1
+            if small_length == min_len:
+                return min_len
     return small_length
 
 

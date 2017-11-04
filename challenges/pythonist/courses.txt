@@ -1,0 +1,12 @@
+pane	0	0	:bash	1	:*Z	0	:/home/shinto/shinto/myrepos/myprojects/hackerrank/challenges/pythonist	1	bash	:
+pane	0	0	:bash	1	:*Z	1	:/home/shinto/shinto/myrepos/myprojects/hackerrank/challenges/pythonist	0	bash	:
+pane	0	1	:bash	0	: 	0	:/home/shinto	1	bash	:
+pane	0	2	:bash	0	: 	0	:/home/shinto/shinto/myrepos/courses/python_advanced/module3	1	bash	:
+pane	0	3	:bash	0	:-Z	0	:/home/shinto/shinto/myrepos/courses/python_advanced/module4_properties_and_class_methods	0	vim	:vim class_method.py
+pane	0	3	:bash	0	:-Z	1	:/home/shinto/shinto/myrepos/courses/python_advanced/module2	1	bash	:
+pane	0	3	:bash	0	:-Z	2	:/home/shinto/shinto/myrepos/courses/python_advanced/module3	0	python3	:python3
+window	0	0	1	:*Z	544a,158x48,0,0{79x48,0,0,1,78x48,80,0,7}
+window	0	1	0	: 	cfbf,158x48,0,0,2
+window	0	2	0	: 	cfc0,158x48,0,0,3
+window	0	3	0	:-Z	6bdf,158x48,0,0{79x48,0,0,6,78x48,80,0[78x24,80,0,4,78x23,80,25,5]}
+state	0	0

@@ -32,7 +32,6 @@ def steady_gene(gene, length):
     start, end = 0, 0
     while end < length:
         substr = gene[start:end]
-        print substr
         try:
             validity_check(substr)
             ans = min(ans, len(substr))

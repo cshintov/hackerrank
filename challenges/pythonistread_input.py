@@ -1,0 +1,1 @@
+/home/shinto/shinto/myrepos/myprojects/hackerrank/challenges/pythonist/read_input.py
